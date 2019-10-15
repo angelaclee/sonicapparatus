@@ -9,7 +9,7 @@ function setup() {
   fft = new Tone.FFT(256).toMaster();
   wave = new Tone.Waveform(256).toMaster();
   sampler = new Tone.Sampler({
-    "C3": "./samples/glass.mp3",
+    C3: "./samples/glass.mp3"
   });
 
   // Sampler Routing
@@ -20,34 +20,30 @@ function setup() {
 function draw() {}
 
 function mouseClicked() {
-  stroke('white');
-  let num = ceil(random(2,5));
-  // let num = 5;
-  crack(mouseX, mouseY, num)
-  // sampler.triggerAttackRelease('C3', '4n');
+  stroke("white");
+  let num = ceil(random(2, 5));
 
-  console.log(num);
-
+  crack(mouseX, mouseY, num);
 
   switch (true) {
-    case (num == 5):
-      sampler.triggerAttackRelease('C2', '4n');
+    case num == 5:
+      sampler.triggerAttackRelease("C2", "4n");
       break;
-    case (num == 4):
-      sampler.triggerAttackRelease('C3', '4n');
+    case num == 4:
+      sampler.triggerAttackRelease("C3", "4n");
       break;
-    case (num == 3):
-      sampler.triggerAttackRelease('C4', '4n');
+    case num == 3:
+      sampler.triggerAttackRelease("C4", "4n");
       break;
-    case (num == 2):
-      sampler.triggerAttackRelease('C5', '4n');
+    case num == 2:
+      sampler.triggerAttackRelease("C5", "4n");
       break;
   }
 }
 
 // recursive create cracks
 function crack(x, y, num, previousVect) {
-  stroke('white');
+  stroke("white");
   if (num <= 0) {
     return;
   }
@@ -56,11 +52,11 @@ function crack(x, y, num, previousVect) {
 
   for (var i = 0; i < random(1, 3); i++) {
     let prev = makeCrack(x, y, previousVect);
-    if (x < 0 || x > windowWidth || y < 0 || y > windowWidth) {
+    if (x < 0 || x > windowWidth || y < 0 || y > windowHeight) {
       return;
     }
 
-    crack(prev.end.x, prev.end.y, num-1, prev.previousVect);
+    crack(prev.end.x, prev.end.y, num - 1, prev.previousVect);
   }
 }
 
