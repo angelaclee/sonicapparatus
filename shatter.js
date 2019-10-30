@@ -1,9 +1,17 @@
 // Synth Global Vars
-let sampler, wave, ftt;
+let sampler, wave, ftt, img, imgSize;
+
+function preload() {
+  img = loadImage('assets/breakglass.jpg');
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   background(51);
+
+  imgSize = floor(0.8 * (windowWidth > windowHeight ? windowHeight : windowWidth));
+  tint(255, 200); // Display at half opacity  
+  image(img, windowWidth/2 - (imgSize/2), windowHeight/2 - (imgSize/2), imgSize, imgSize);
 
   // Create Sampler stuff
   fft = new Tone.FFT(256).toMaster();
